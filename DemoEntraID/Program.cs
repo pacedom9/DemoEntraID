@@ -26,13 +26,14 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI(c =>
   {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Buffetti.Contratti.Attivazioni v1");
-    c.OAuthClientId("50ddbf3e-c916-4ae7-9061-98a42e335337");
+    c.OAuthClientId(builder.Configuration["EntraID:ClientId"]);
     c.OAuthUsePkce();
   });
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

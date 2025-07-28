@@ -25,11 +25,11 @@ public static class App
         {
           AuthorizationCode = new OpenApiOAuthFlow
           {
-            AuthorizationUrl = new Uri("https://login.microsoftonline.com/1a59e398-83d8-4052-aec9-74a7d6461c5e/oauth2/v2.0/authorize"),
-            TokenUrl = new Uri("https://login.microsoftonline.com/1a59e398-83d8-4052-aec9-74a7d6461c5e/oauth2/v2.0/token"),
+            AuthorizationUrl = new Uri(builder.Configuration["SwaggerEntraID:AuthorizationUrl"]!),
+            TokenUrl = new Uri(builder.Configuration["SwaggerEntraID:TokenUrl"]!),
             Scopes = new Dictionary<string, string>
                     {
-                        { "api://50ddbf3e-c916-4ae7-9061-98a42e335337/demo", "Access API" }
+                        { builder.Configuration["SwaggerEntraID:Scope"]!, "Access API" }
                     }
           }
         }
@@ -46,7 +46,7 @@ public static class App
                         Id = "oauth2"
                     }
                 },
-                new[] { "api://50ddbf3e-c916-4ae7-9061-98a42e335337/demo" }
+                new[] { builder.Configuration["SwaggerEntraID:Scope"]! }
             }
         });
     });
